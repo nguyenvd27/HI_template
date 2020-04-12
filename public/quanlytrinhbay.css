@@ -1,4 +1,10 @@
-.sidebar-left {
-    /* padding-left: 10px;
-    padding: 50px; */
+.map {
+    width: 100%;
+    height: auto;
+}
+.gg-map {
+    width: 200%;
+    height: 600px;
+    background-position: center center;
+    background-size: cover;
 }
