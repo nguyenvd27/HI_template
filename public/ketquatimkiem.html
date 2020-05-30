@@ -102,8 +102,8 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item mr-1"><a href="index.html">Trang chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cài đặt</li>
+                <li class="breadcrumb-item mr-1"><a href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">kết quả tìm kiếm</li>
             </ol>
         </nav>
 
@@ -183,15 +183,44 @@
 
             <!-- Content -->
             <div class="col-8">
-                <h4 class="text-center">Cài đặt</h4>
-                <div class="ml-5 mr-5">
-                    <button type="button" class="btn btn-warning btn-lg btn-block mt-5" onclick="showDemo()">Cài đặt âm
-                        thanh cảnh báo</button>
-                    <button type="button" class="btn btn-info btn-lg btn-block mt-5" onclick="showDemo()">Cài đặt độ
-                        sáng màn hình</button>
-                    <button type="button" class="btn btn-danger btn-lg btn-block mt-5" onclick="showDemo()">Cài đặt
-                        thông báo</button>
+                <h3 class="text-center">Kết quả tìm kiếm cho "MH"</h4>
+                <h5> Số lượng kết quả tìm kiếm: 3</p>
+                <div class="mt-5">
+                    <p>Độ ưu tiên cao: thông tin về drone<p>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Số hiệu</th>
+                                <th scope="col">Thời gian tạo</th>
+                                <th scope="col">Quãng đường bay</th>
+                                <th scope="col">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>MH-370</td>
+                                <td>12h30 02/03/2020 </td>
+                                <td>12Km</td>
+                                <td><a href="#">Chi tiết</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>MH-777</td>
+                                <td>6h06 03/03/2020</td>
+                                <td>8Km</td>
+                                <td><a href="#">Chi tiết</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <br/>
+                <p>Độ ưu tiên thấp: các cảnh báo của drone<p>
+                    <div class="jumbotron">
+                      <h1 class="display-4">MH-370 </h1>
+                      <p class="lead">Pin yếu: % pin còn lại là 20%, thời gian có thể bay là 30'</p>
+                    </div>
             </div>
 
             <!-- Sidebar right -->
