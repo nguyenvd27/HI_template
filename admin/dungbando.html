@@ -207,7 +207,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Tạo trình bay
+            Dựng bản đồ
             <small>đơn giản, nhanh chóng</small>
           </h1>
           <ol class="breadcrumb">
@@ -258,7 +258,6 @@
                     <br>
                     <button class="btn btn-primary text-center" v-on:click="save()">Lưu bản đồ</button>
                   </div>
-                  
                 </div>
               </div>
             </section><!-- right col -->
@@ -336,6 +335,7 @@
           if(this.dungbandoCount % 2 == 0){
             console.log('ck')
             this.dungbandoGif = 'dungbando.gif'
+            // this.dungbandoGif = 'https://j.gifs.com/k8xEE5.gif'
           } else {
             this.dungbandoGif = 'dungbandoImg.png'
             console.log('clik')
