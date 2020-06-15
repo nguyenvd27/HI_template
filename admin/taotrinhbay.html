@@ -165,6 +165,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="taotrinhbay.html"><i class="fa fa-circle-o"></i> Tạo trình bay</a></li>
+                <li><a href="dungbando.html"><i class="fa fa-circle-o"></i> Dựng bản đồ</a></li>
                 <li><a href="xemdanhsachtrinhbay.html"><i class="fa fa-circle-o"></i> Xem danh sách trình bay</a></li>
                 <li><a href="xemcanhbao.html"><i class="fa fa-circle-o"></i> Xem cảnh báo rủi ro</a></li>
               </ul>
@@ -202,7 +203,7 @@
       <!-- =============================================== -->
 
       <!-- Right side column. Contains the navbar and content of the page -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" id="app">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -246,64 +247,129 @@
                     <div class="form-group">
                       <label>Điểm đầu</label>
                       <select id="start" class="form-control">
-                        <option value="Hà Nội, vi">Hà Nội</option>
-                        <option value="Hải Phòng, vi">Hải Phòng</option>
-                        <option value="Quảng Ninh, vi">Quảng Ninh</option>
-                        <option value="Thanh Hóa, vi">Thanh Hóa</option>
+                        <option disabled selected>Chọn 1 vị trí</option>
+                        <option >Cột điện số 1</option>
+                        <option >Cột điện số 2</option>
+                        <option >Cột điện số 3</option>
+                        <option >Cột điện số 4</option>
+                        <option >Cột điện số 5</option>
+                        <option >Cột điện số 6</option>
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Điểm cuối</label>
                       <select id="end" class="form-control">
-                        <option value="Hải Phòng, vi">Hải Phòng</option>
-                        <option value="Hà Nội, vi">Hà Nội</option>
-                        <option value="Quảng Ninh, vi">Quảng Ninh</option>
-                        <option value="Thanh Hóa, vi">Thanh Hóa</option>
+                        <option disabled selected>Chọn 1 vị trí</option>
+                        <option >Cột điện số 1</option>
+                        <option >Cột điện số 2</option>
+                        <option >Cột điện số 3</option>
+                        <option >Cột điện số 4</option>
+                        <option >Cột điện số 5</option>
+                        <option >Cột điện số 6</option>
                       </select>
                     </div>
-                    <!-- Select multiple-->
-                    <div class="form-group">
-                      <label>Waypoints</label>
-                      <select id="waypoints" multiple class="form-control">
-                        <option value="Nam Định, vi">Nam Định</option>
-                        <option value="Hưng Yên, vi">Hưng Yên</option>
-                        <option value="Bắc Ninh, vi">Bắc Ninh</option>
-                        <option value="Bắc Giang, vi">Bắc Giang</option>
-                        <option value="Thái Nguyên, vi">Thái Nguyên</option>
-                        <option value="Hà Nam, vi">Hà Nam</option>
-                      </select>
+                    <div v-for="(item, index) in waypointList" :key="index" :id="'item'+index">
+                      <!-- Select-->
+                      <div class="form-group col-lg-6">
+                        <label>Waypoints</label>
+                        <select id="waypoints" class="form-control" v-model="item.waypoint">
+                          
+                          <option disabled value="">Chọn 1 waypoint</option>
+                          <option>Cột điện số 1</option>
+                          <option>Cột điện số 2</option>
+                          <option>Cột điện số 3</option>
+                          <option>Cột điện số 4</option>
+                          <option>Cột điện số 5</option>
+                          <option>Cột điện số 6</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label>Thông số của drone</label>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#myModal'+index">Thiết lập 
+                        </button>
+                        <button class="btn btn-danger" v-on:click="onDelete(index)">Xóa</button>
+                      </div>
+
+                      <!-- Modal -->
+                      <div class="modal fade" :id="'myModal'+index" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel">Thiết lập thông số cho drone tại vị trí waypoint</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                                <div class="form-group col-lg-6">
+                                  <label for="formControlRange01 col-lg-6">Góc nghiêng chụp ( 0 đến 180 độ): {{item.goc ? item.goc : 10}}</label>
+                                  <input type="range" class="form-control-range" min="0" max="180" id="formControlRange01" v-model="item.goc">
+                                </div>
+                                <div class="form-group">
+                                  <label for="formControlRange01">Chất lượng ảnh: </label>
+                                  <br>
+                                  <input type="radio" id="status-in-use" value="1">
+                                  <label for="status-in-use">HD</label>
+                                  &nbsp; &nbsp;
+                                  <input type="radio" id="status-in-use" value="2">
+                                  <label for="status-in-use">FullHD</label>
+                                  &nbsp; &nbsp;
+                                  <input type="radio" id="status-use" value="3">
+                                  <label for="status-in-use">4K</label>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange01">Thời gian dừng chụp ( Từ 1 đến 100 giây): {{item.time ? item.time : 10}}</label>
+                                <input type="range" class="form-control-range" min="1" max="100" id="formControlRange01" v-model="item.time" >
+                              </div>
+                              
+                              
+                              <div class="form-group">
+                                <label for="formControlRange01">Tốc độ ( Từ 1 đến 100 m/s ): {{item.tocdo ? item.tocdo : 50}}</label>
+                                <input type="range" class="form-control-range" min="1" max="100" id="formControlRange01" v-model="item.tocdo">
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange02">Độ cao ( Từ 5 đến 500 m): {{item.docao ? item.docao : 250}} <span id="demo02"></span></label>
+                                <input type="range" class="form-control-range" min="5" max="500" id="formControlRange02" v-model="item.docao">
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label>Thời gian dừng chụp</label>
-                      <input type="number" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="formControlRange01">Tốc độ ( Từ 1 đến 200 Km/h ): <span id="demo01"></span></label>
-                      <input type="range" class="form-control-range" min="1" max="200" id="formControlRange01">
-                    </div>
-                    <div class="form-group">
-                      <label for="formControlRange02">Độ cao ( Từ 50 đến 1000 m): <span id="demo02"></span></label>
-                      <input type="range" class="form-control-range" min="50" max="1000" id="formControlRange02">
-                    </div>
-                    <div class="form-group">
-                      <label>Góc nghiêng chụp (độ)</label>
-                      <input type="number" class="form-control"/>
+                      
+                    <div class="form-group text-center">
+                      <button type="button" class="btn btn-success" v-on:click="addWaypoints()">Thêm Waypoint</button>
                     </div>
                   </div><!-- /.box-body -->
                 </form>
 
                 <div class="box-footer text-center">
-                    <button id="submit" class="btn btn-primary">Xem trước</button>
-                    <button class="btn btn-primary" onclick="create()">Tạo trình bay</button>
+                    <button id="submit" class="btn btn-primary" v-on:click="changeView()">Tạo trình bay (bản đồ ảo)</button>
+                    <a class="btn btn-primary" href="https://www.figma.com/proto/vtNY9oE4CgxBhNfIQ83mGY/20192?node-id=1%3A2&scaling=scale-down&fbclid=IwAR0W8HtHyvOpVeQzWmnsHNInWRdZwwdOq-AqDnUCBdq2KFSr2wAyjNmCoRw">Cho bay thực tế</a>
                   </div>
               </div><!-- /.box -->
 
             </section><!-- /.Left col -->
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <section class="col-lg-9 connectedSortable">
-              <div class="box box-primary">
-                <div id="map" style="height: 720px; width: 100%;"></div>
-                <!--<iframe class="gg-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.696199620736!2d105.84315191535886!3d21.004811693970396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac76ccab6dd7%3A0x55e92a5b07a97d03!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBCw6FjaCBraG9hIEjDoCBO4buZaQ!5e0!3m2!1svi!2s!4v1586633903389!5m2!1svi!2s" frameborder="0" style="border:0; height: 570px; width: 100%;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>-->
+              <div class="box box-primary" id="app1">
+                <div v-if="viewWaypoint">
+                  <div class="alert alert-success" role="alert">
+                    {{message}}
+                  </div>
+                  <img :src="waypointsPng" v-on:click="clickImg" style="height: 650px; width: 100%;">
+                </div>
+                <div v-else>
+                  <!-- <p>Khu vực: phường Bách Khoa</p> -->
+                  <div class="alert alert-success" role="alert">
+                    Khu vực: phường Bách Khoa
+                  </div>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7095009515806!2d105.84370131535874!3d21.004278793988597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac768ffe1abd%3A0x22b136bcf1c08e2a!2zQsOhY2ggS2hvYSwgSGFpIELDoCBUcsawbmcsIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1591199445769!5m2!1svi!2s" width="600" height="450" frameborder="0" style="border:0; height: 650px; width: 100%;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
               </div>
             </section><!-- right col -->
           </div><!-- /.row (main row) -->
@@ -384,80 +450,59 @@
     <script src="dist/js/app.min.js" type="text/javascript"></script>
        
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 
   <script>
-        function initMap() {
-            var directionsService = new google.maps.DirectionsService;
-            var directionsRenderer = new google.maps.DirectionsRenderer;
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 6,
-                center: {lat: 16.9769427, lng: 105.8921285}
-            });
-            directionsRenderer.setMap(map);
-
-            document.getElementById('submit').addEventListener('click', function() {
-                calculateAndDisplayRoute(directionsService, directionsRenderer);
-            });
-        }
-
-        function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-            var waypts = [];
-            var checkboxArray = document.getElementById('waypoints');
-            for (var i = 0; i < checkboxArray.length; i++) {
-                if (checkboxArray.options[i].selected) {
-                    waypts.push({
-                        location: checkboxArray[i].value,
-                        stopover: true
-                    });
-                }
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'Cột điện số 1, vị trí: 1 Đại Cồ Việt; Cột điện số 2, vị trí: 23 Đại Cồ Việt; Cột điện số 4, vị trí: 25 Trần Đại Nghĩa; Cột điện số 5, vị trí: 16 Tạ Quang Bửu',
+        viewWaypoint: false,
+        obj: {},
+        waypointList: [],
+        waypointsPng: 'waypoints.png',
+        count: 0
+      },
+      methods: {
+        clickImg() {
+          // alert('click img')
+          this.count++
+          if(this.count % 2 == 0){
+            this.waypointsPng = 'waypoints.png'
+          } else {
+            this.waypointsPng = 'trinhbay2.gif'
+          }
+        },
+        changeView() {
+          this.viewWaypoint = !this.viewWaypoint
+          console.log('click')
+          var audio = new Audio('rec.mp3')
+          audio.play()
+        },
+        addWaypoints() {
+          this.obj = {}
+          this.obj.waypoint = ''
+          this.waypointList.push(this.obj)
+          console.log(this.waypointList)
+        },
+        onDelete(index){
+          for(let i=0; i< this.waypointList.length; i++){
+            if(i==index){
+              this.waypointList.splice(i, 1)
             }
-
-            directionsService.route({
-                origin: document.getElementById('start').value,
-                destination: document.getElementById('end').value,
-                waypoints: waypts,
-                optimizeWaypoints: true,
-                travelMode: 'DRIVING'
-            }, function(response, status) {
-                if (status === 'OK') {
-                    directionsRenderer.setDirections(response);
-                    var route = response.routes[0];
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-            });
+          }
+          console.log(this.waypointList)
         }
-        function create() {
-            alert("Tạo trình bay thành công ");
-        }
+      }
+    })
 
-        function clickDemo() {
-          alert("Click thành công!!!")
-        }
+    function clickDemo() {
+      alert("Click thành công!!!")
+    }
 
-        function showDemo() {
-            alert("Cảm ơn bạn đã sử dụng! Tính năng đang được phát triển")
-        }
-
-        var slider = document.getElementById("formControlRange01");
-        var output = document.getElementById("demo01");
-        output.innerHTML = slider.value;
-
-        slider.oninput = function() {
-          output.innerHTML = this.value;
-        }
-
-        var slider02 = document.getElementById("formControlRange02");
-        var output02 = document.getElementById("demo02");
-        output02.innerHTML = slider02.value;
-
-        slider02.oninput = function() {
-          output02.innerHTML = this.value;
-        }
-
-        
+    function create() {
+      alert("Click ok")
+    }
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHARpF3EFSAmJCPtdNAVYfMoLOeico1yc&callback=initMap">
-    </script>    
+      
 </html>
