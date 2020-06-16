@@ -242,18 +242,23 @@
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <section class="col-lg-9 connectedSortable">
               <div class="box box-primary" id="app1">
-
-                <div v-if="viewPointCloud==false && dungbando == 0">
+                <div v-if="dungbando == 0">
                   <p>Bấm vào bản đồ để phóng to / thu nhỏ</p>
                   <img :src="imgZoom" v-on:click="zoom" style="height: 650px; width: 100%;">
                 </div>
-                <div v-else-if="viewPointCloud==true && dungbando == 0">
-                  <p>Bấm vào bản đồ để dừng</p>
-                  <img :src="pointCloudGif" v-on:click="showPointCloud"  style="height: 650px; width: 100%;">
-                </div>
                 <div v-else-if="dungbando == 1">
-                  Bấm vào bản đồ để dừng
-                  <img :src="dungbandoGif" v-on:click="dungbando3D"  style="height: 650px; width: 100%;">
+                  <p>Bấm vào bản đồ để dừng</p>
+                  <video v-if="pointCloudImg==0" v-on:click="{pointCloudImg=1}" muted style="height: 650px; width: 100%; margin-left: 0px" autoplay>
+                    <source src="point-cloud-update.mp4" style="height: 650px; width: 120%; margin-left: 0px" type="video/mp4">
+                  </video>
+                  <img v-else-if="pointCloudImg==1" src="pointCloudImg.png" v-on:click="pointCloudImg=0"  style="height: 650px; width: 100%;">
+                </div>
+                <div v-else-if="dungbando == 2">
+                  <p>Bấm vào bản đồ để dừng</p>
+                  <video v-if="dungbandoCount==0" v-on:click="{dungbandoCount=1}" muted style="height: 650px; width: 100%;" autoplay>
+                    <source src="dungbando-update.mp4" type="video/mp4">
+                  </video>
+                  <img v-else-if="dungbandoCount==1" src="dungbandoImg.png" v-on:click="dungbandoCount=0"  style="height: 650px; width: 100%;">
                   <div class="text-center">
                     <br>
                     <button class="btn btn-primary text-center" v-on:click="save()">Lưu bản đồ</button>
@@ -292,14 +297,11 @@
       el: '#app',
       data: {
         message: 'Day la phan hien thi message',
-        viewPointCloud: false,
         imgZoom: 'nozoom.png',
         countZoom: 0,
-        pointCloudGif: 'pointCloud.gif',
         pointCloudImg: 0,
         dungbando: 0,
-        dungbandoCount: 0,
-        dungbandoGif: 'dungbando.gif'
+        dungbandoCount: 0
       },
       methods: {
         zoom() {
@@ -312,36 +314,10 @@
           this.countZoom++
         },
         viewPointCloudMesh() {
-          this.dungbando = 0
-          // this.viewPointCloud = !this.viewPointCloud
-          this.viewPointCloud = true
-        },
-        showPointCloud() {
-          this.dungbando = 0
-          this.pointCloudImg++  
-          if(this.pointCloudImg % 2 == 0){
-            this.pointCloudGif = 'pointCloud.gif'
-          } else {
-            this.pointCloudGif = 'pointCloudImg.png'
-          }
-          // this.pointCloudImg++
+          this.dungbando = 1
         },
         showbando() {
-          this.dungbando = 1
-        },
-        dungbando3D() {
-          this.dungbando = 1
-          this.dungbandoCount++  
-          if(this.dungbandoCount % 2 == 0){
-            console.log('ck')
-            this.dungbandoGif = 'dungbando.gif'
-            // this.dungbandoGif = 'https://j.gifs.com/k8xEE5.gif'
-          } else {
-            this.dungbandoGif = 'dungbandoImg.png'
-            console.log('clik')
-          }
-          console.log('click ok')
-          console.log(this.dungbandoCount)
+          this.dungbando = 2
         },
         save() {
           alert('Lưu bản đồ vào máy tính thành công!')
