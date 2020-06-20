@@ -25,7 +25,7 @@
   </head>
   <body class="skin-blue">
     <!-- Site wrapper -->
-    <div class="wrapper">
+    <div class="wrapper" id="app">
       
       <header class="main-header">
         <a href="index.html" class="logo"><b>Admin</b>LTE</a>
@@ -278,12 +278,19 @@
         </section>
 
         <!-- Main content -->
-        <section class="content">
+        <section v-if="type % 2 == 1" class="content">
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <button class="btn btn-success btn-sm" v-on:click="showType">Xem dưới dạng bản đồ</button>
+              <br>
+            </div>
+          </div>
+          <br>
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Bảng dữ liệu</h3>
+                  <h3 class="box-title">Tổng: 4 trình bay</h3>
                   <div class="box-tools">
                     <div class="input-group">
                       <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Tìm kiếm"/>
@@ -346,6 +353,35 @@
             </div>
           </div>
         </section><!-- /.content -->
+
+        <section v-if="type % 2 == 0" class="content">
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <button class="btn btn-success btn-sm" v-on:click="showType">Xem dưới dạng danh sách</button>
+              <br>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Tổng: 4 trình bay</h3>
+                </div><!-- /.box-header -->
+                <div class="box">
+
+
+                  
+                  <!-- Code tu cho nay nhe -->
+                  <div style="background-image: url('bando.png'); height: 650px;">
+                    <p>hello</p>
+                    <span class="badge badge-light">9</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
       <footer class="main-footer">
@@ -368,9 +404,22 @@
     <script src="dist/js/app.min.js" type="text/javascript"></script>
        
   </body>
-  <script type="text/javascript">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script>
     function clickDemo() {
       alert("Click thành công!!!")
     }
+
+    var vm = new Vue ({
+      el: '#app',
+      data: {
+        type: 0 // 0: hien thi danh sach, 1: hien thi ban do
+      },
+      methods: {
+        showType (){
+          this.type++
+        }
+      }
+    })
   </script>
 </html>
