@@ -1,0 +1,7 @@
+.imageDirectory .canvasDirectory{
+	position: absolute;
+}
+#myCanvas{
+	position: absolute;
+	margin:0px; 
+}
