@@ -15,6 +15,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="dist/css/skins/all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="dist/css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -373,8 +374,13 @@
 
                   
                   <!-- Code tu cho nay nhe -->
-                  <div style="background-image: url('bando.png'); height: 650px;">
-                    <p>hello</p>
+                  <div>
+                    <div class="canvasDirectory">
+                     <canvas id="myCanvas" width="800" height="650"></canvas>
+                   </div>
+                    <div class="imageDirectory">
+                      <img src="bando.png" style="width: 100%; height: auto;">
+                    </div>
                     <span class="badge badge-light">9</span>
                   </div>
                 </div>
@@ -406,11 +412,69 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
   <script>
+    var point = [
+      {x:30,y:150},
+      {x:120,y:130},
+      {x:220,y:130},
+      {x:310,y:140},
+      {x:50,y:230},
+      {x:100,y:240},
+      {x:210,y:220},
+      {x:330,y:225},
+      {x:370,y:50},
+      {x:380,y:130},
+      {x:380,y:200},
+      {x:365,y:280},
+      ];
+    draw(point);
+    function draw(point){
+      var canvas = document.getElementById('myCanvas');
+      var canvas2 = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var context2 = canvas2.getContext('2d');
+      var i=0;
+      context.beginPath();
+      context.moveTo(point[0].x,point[0].y);
+      while(point[i+1]){
+        if(i==3||i==7){
+          context.moveTo(point[i+1].x,point[i+1].y);
+        }
+        context.lineTo(point[i+1].x,point[i+1].y);
+        i++;
+      }
+      context.strokeStyle = 'red';
+      context.lineWidth = 3;
+      context.stroke();
+      i=0;
+      while(point[i+1]){
+        if(i!=3&&i!=7)
+        context2.rect(point[i].x,point[i].y,point[i+1].x-point[i].x,point[i+1].y-point[i].y); 
+        i++;
+      }
+      canvas.onmousemove = function (e) {
+        var rect = this.getBoundingClientRect(),
+          x = e.clientX - rect.left,
+          y = e.clientY - rect.top,
+          i = 0, r=0;
+        if(context.isPointInPath(x, y)){
+          //clickDemo();   
+        }
+      }
+      canvas.onclick = function (e) {
+        var rect = this.getBoundingClientRect(),
+          x = e.clientX - rect.left,
+          y = e.clientY - rect.top,
+          i = 0, r=0;
+        if(context.isPointInPath(x, y)){
+          clickDemo();   
+        }
+      }
+    }
     function clickDemo() {
       alert("Click thành công!!!")
     }
 
-    var vm = new Vue ({
+    /*var vm = new Vue ({
       el: '#app',
       data: {
         type: 0 // 0: hien thi danh sach, 1: hien thi ban do
@@ -420,6 +484,6 @@
           this.type++
         }
       }
-    })
+    })*/
   </script>
 </html>
