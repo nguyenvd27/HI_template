@@ -16,13 +16,11 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="dist/css/skins/all-skins.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="dist/css/style.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+    <style type="text/css">
+      .hover-img {
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body class="skin-blue">
     <!-- Site wrapper -->
@@ -168,6 +166,7 @@
                 <li><a href="taotrinhbay.html"><i class="fa fa-circle-o"></i> Tạo trình bay</a></li>
                 <li><a href="dungbando.html"><i class="fa fa-circle-o"></i> Dựng bản đồ</a></li>
                 <li><a href="xemdanhsachtrinhbay.html"><i class="fa fa-circle-o"></i> Xem danh sách trình bay</a></li>
+                <li><a href="xemdanhsachbando.html"><i class="fa fa-circle-o"></i> Xem danh sách bản đồ</a></li>
                 <li><a href="xemcanhbao.html"><i class="fa fa-circle-o"></i> Xem cảnh báo rủi ro</a></li>
               </ul>
             </li>
@@ -305,48 +304,59 @@
                   <table class="table table-bordered table-hover">
                     <tr>
                       <th>STT</th>
-                      <th>Số hiệu</th>
-                      <th>Ngày bay</th>
-                      <th>Thời gian đã bay</th>
-                      <th>Quãng đường còn lại</th>
-                      <th>Phần trăm pin còn lại</th>
-                      <th>Ghi chú</th>
+                      <th>ID</th>
+                      <th>Drone được gán</th>
+                      <th>Điểm đầu</th>
+                      <th>Điểm cuối</th>
+                      <th>Hành động</th>
                     </tr>
                     <tr>
                       <td>1</td>
-                      <td>MH_370</td>
-                      <td>01-06-2020</td>
-                      <td>1 giờ 30 phút</td>
-                      <td><span class="label label-success">2km</span></td>
-                      <td><span class="label label-danger">50%</span></td>
-                      <td>Drone bay gặp trời mưa, thời gian bay nhiều hơn dự kiến 20 phút</td>
+                      <td>JDK123456789</td>
+                      <td>MH_370, MH_222, VN_985</td>
+                      <td>Số 1 Đại Cồ Việt</td>
+                      <td>Số 299 Giải Phóng</td>
+                      <td>
+                        <a href="chitiettrinhbay.html" class="btn btn-info btn-sm">Xem</a>
+                        <a href="chitiettrinhbay.html" class="btn btn-success btn-sm">Sửa</a>
+                        <a v-on:click="deleteList" class="btn btn-danger btn-sm">Xóa</a>
+                      </td>
                     </tr>
                     <tr>
                       <td>2</td>
-                      <td>MH_377</td>
-                      <td>01-06-2020</td>
-                      <td>1 giờ 30 phút</td>
-                      <td><span class="label label-success">3km</span></td>
-                      <td><span class="label label-danger">60%</span></td>
-                      <td>Drone bay gặp trời mưa, thời gian bay nhiều hơn dự kiến 20 phút</td>
+                      <td>SML123456789</td>
+                      <td>MH_377, VM_789</td>
+                      <td>Số 5 Tạ Quang Bửu</td>
+                      <td>Số 299 Trường Chinh</td>
+                      <td>
+                        <a href="chitiettrinhbay.html" class="btn btn-info btn-sm">Xem</a>
+                        <a href="chitiettrinhbay.html" class="btn btn-success btn-sm">Sửa</a>
+                        <a v-on:click="deleteList" class="btn btn-danger btn-sm">Xóa</a>
+                      </td>
                     </tr>
                     <tr>
                       <td>3</td>
-                      <td>MH_333</td>
-                      <td>01-06-2020</td>
-                      <td>1 giờ 30 phút</td>
-                      <td><span class="label label-success">1km</span></td>
-                      <td><span class="label label-danger">20%</span></td>
-                      <td>Drone bay gặp trời mưa, thời gian bay nhiều hơn dự kiến 20 phút</td>
+                      <td>VDN123456789</td>
+                      <td>SH_875, VN_299, MH_333</td>
+                      <td>Số 1 Đại Cồ Việt</td>
+                      <td>Số 299 Giải Phóng</td>
+                      <td>
+                        <a href="chitiettrinhbay.html" class="btn btn-info btn-sm">Xem</a>
+                        <a href="chitiettrinhbay.html" class="btn btn-success btn-sm">Sửa</a>
+                        <a v-on:click="deleteList" class="btn btn-danger btn-sm">Xóa</a>
+                      </td>
                     </tr>
                     <tr>
                       <td>4</td>
-                      <td>MH_371</td>
-                      <td>01-06-2020</td>
-                      <td>1 giờ 30 phút</td>
-                      <td><span class="label label-success">5km</span></td>
-                      <td><span class="label label-danger">70%</span></td>
-                      <td>Drone bay gặp trời mưa, thời gian bay nhiều hơn dự kiến 20 phút</td>
+                      <td>VKL123456789</td>
+                      <td>SH_123, MH_371</td>
+                      <td>Số 1 Đại Cồ Việt</td>
+                      <td>Số 299 Giải Phóng</td>
+                      <td>
+                        <a href="chitiettrinhbay.html" class="btn btn-info btn-sm">Xem</a>
+                        <a href="chitiettrinhbay.html" class="btn btn-success btn-sm">Sửa</a>
+                        <a v-on:click="deleteList" class="btn btn-danger btn-sm">Xóa</a>
+                      </td>
                     </tr>
                   </table>
                 </div><!-- /.box-body -->
@@ -355,7 +365,8 @@
           </div>
         </section><!-- /.content -->
 
-        <section v-if="type % 2 == 0" class="content">
+        <!-- Main content -->
+        <section v-show="type % 2 == 0" class="content">
           <div class="row">
             <div class="col-xs-12 text-center">
               <button class="btn btn-success btn-sm" v-on:click="showType">Xem dưới dạng danh sách</button>
@@ -364,30 +375,45 @@
           </div>
           <br>
           <div class="row">
-            <div class="col-xs-12">
-              <div class="box">
+            <section class="col-lg-12 connectedSortable">
+              <div class="box box-primary" id="app1">
                 <div class="box-header">
                   <h3 class="box-title">Tổng: 4 trình bay</h3>
-                </div><!-- /.box-header -->
-                <div class="box">
-
-
-                  
-                  <!-- Code tu cho nay nhe -->
-                  <div>
-                    <div class="canvasDirectory">
-                     <canvas id="myCanvas" width="800" height="650"></canvas>
-                   </div>
-                    <div class="imageDirectory">
-                      <img src="bando.png" style="width: 100%; height: auto;">
-                    </div>
-                    <span class="badge badge-light">9</span>
+                </div>
+                <div>
+                  <img v-on:click="viewDetail" class="hover-img" src="ve02-removebg-preview.png" style="position: absolute; top: 20px; left: 0px;" data-toggle="tooltip" data-placement="top" data-html="true" title="
+                  <div style='height: 50px; width: 400px; background-color: green'>
+                    <p style='width: 400px; background-color: black'>Trình bay JKDM01234567<br>Drone được gán: MH_370, MH_333, VN_495<p>
+                    <img src='waypoints.png' style=' width: 400px'/>
                   </div>
+                  ">
+                  <img v-on:click="viewDetail" class="hover-img" src="ve03-removebg-preview.png" style="position: absolute; top: 10px; left: 750px" data-toggle="tooltip" data-placement="top" data-html="true" title="
+                  <div style='height: 50px; width: 400px; background-color: green'>
+                    <p style='width: 400px; background-color: black'>Trình bay JKDM01234567<br>Drone được gán: MH_370, MH_333, VN_495<p>
+                    <img src='waypoints.png' style=' width: 400px'/>
+                  </div>
+                  ">
+                  <img v-on:click="viewDetail" class="hover-img" src="ve03-removebg-preview.png" style="position: absolute; top: 300px; left: 0px;" data-toggle="tooltip" data-placement="top" data-html="true" title="
+                  <div style='height: 50px; width: 400px; background-color: green'>
+                    <p style='width: 400px; background-color: black'>Trình bay JKDM01234567<br>Drone được gán: MH_370, MH_333, VN_495<p>
+                    <img src='waypoints.png' style=' width: 400px'/>
+                  </div>
+                  ">
+                  <img v-on:click="viewDetail" class="hover-img" src="ve02-removebg-preview.png" style="position: absolute; top: 400px; left: 600px" data-toggle="tooltip" data-placement="top" data-html="true" title="
+                  <div style='height: 50px; width: 400px; background-color: green'>
+                    <p style='width: 400px; background-color: black'>Trình bay JKDM01234567<br>Drone được gán: MH_370, MH_333, VN_495<p>
+                    <img src='waypoints.png' style=' width: 400px'/>
+                  </div>
+                  ">
+                  <img src="bando.png" style="height: 750px; width: 100%;">
                 </div>
               </div>
-            </div>
-          </div>
+            </section><!-- right col -->
+          </div><!-- /.row (main row) -->
         </section><!-- /.content -->
+
+
+
       </div><!-- /.content-wrapper -->
 
       <footer class="main-footer">
@@ -412,69 +438,11 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
   <script>
-    var point = [
-      {x:30,y:150},
-      {x:120,y:130},
-      {x:220,y:130},
-      {x:310,y:140},
-      {x:50,y:230},
-      {x:100,y:240},
-      {x:210,y:220},
-      {x:330,y:225},
-      {x:370,y:50},
-      {x:380,y:130},
-      {x:380,y:200},
-      {x:365,y:280},
-      ];
-    draw(point);
-    function draw(point){
-      var canvas = document.getElementById('myCanvas');
-      var canvas2 = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      var context2 = canvas2.getContext('2d');
-      var i=0;
-      context.beginPath();
-      context.moveTo(point[0].x,point[0].y);
-      while(point[i+1]){
-        if(i==3||i==7){
-          context.moveTo(point[i+1].x,point[i+1].y);
-        }
-        context.lineTo(point[i+1].x,point[i+1].y);
-        i++;
-      }
-      context.strokeStyle = 'red';
-      context.lineWidth = 3;
-      context.stroke();
-      i=0;
-      while(point[i+1]){
-        if(i!=3&&i!=7)
-        context2.rect(point[i].x,point[i].y,point[i+1].x-point[i].x,point[i+1].y-point[i].y); 
-        i++;
-      }
-      canvas.onmousemove = function (e) {
-        var rect = this.getBoundingClientRect(),
-          x = e.clientX - rect.left,
-          y = e.clientY - rect.top,
-          i = 0, r=0;
-        if(context.isPointInPath(x, y)){
-          //clickDemo();   
-        }
-      }
-      canvas.onclick = function (e) {
-        var rect = this.getBoundingClientRect(),
-          x = e.clientX - rect.left,
-          y = e.clientY - rect.top,
-          i = 0, r=0;
-        if(context.isPointInPath(x, y)){
-          clickDemo();   
-        }
-      }
-    }
     function clickDemo() {
       alert("Click thành công!!!")
     }
 
-    /*var vm = new Vue ({
+    var vm = new Vue ({
       el: '#app',
       data: {
         type: 0 // 0: hien thi danh sach, 1: hien thi ban do
@@ -482,8 +450,15 @@
       methods: {
         showType (){
           this.type++
+        },
+        viewDetail (){
+          // alert('ok')
+          window.location.href = 'chitiettrinhbay.html';
+        },
+        deleteList () {
+          alert('Bạn đã chắc chắn muốn xóa?')
         }
-      }
-    })*/
+      },
+    })
   </script>
 </html>

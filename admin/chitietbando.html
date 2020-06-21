@@ -264,206 +264,66 @@
       <!-- =============================================== -->
 
       <!-- Right side column. Contains the navbar and content of the page -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" id="app">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Xem cảnh báo nguy hiểm
-            <small>cập nhật thời gian thực</small>
+            Dựng bản đồ
+            <small>đơn giản, nhanh chóng</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
             <li><a href="#">Quản lý trình bay</a></li>
-            <li class="active">Xem cảnh báo</li>
+            <li class="active">dựng bản đồ</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
-
-
+          <!-- Main row -->
           <div class="row">
-            <div class="col-md-6">
-              <div class="box box-default">
-                <div class="box-header with-border">
-                  <i class="fa fa-warning"></i>
-                  <h3 class="box-title">Cảnh báo mới nhất về thông số kĩ thuật của drone</h3>
+            <!-- Left col -->
+            <section class="col-lg-3 connectedSortable">
+
+              <!-- general form elements -->
+              <div class="box box-primary">
+                <div class="box-header text-center">
+                  <h3 class="box-title">Bản đồ 3D ID: JDK12345678</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body">
-                  <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><i class="icon fa fa-ban"></i> Drone MH_370 Pin yếu!</h4>
-                    Phần trăm pin còn lại 10%, thời gian còn lại có thể bay: 1km, quãng đường còn phải bay 0.9km
-                  </div>
-                  <div class="alert alert-warning alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><i class="icon fa fa-warning"></i> Drone MH_333 vỡ vỏ!</h4>
-                    Bị vỡ vỏ do va chạm với vật thể xung quanh 
-                  </div>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Bảng cảnh báo</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table class="table table-bordered">
-                    <tr>
-                      <th >#</th>
-                      <th>Số hiệu drone</th>
-                      <th>Tên cảnh báo</th>
-                      <th>Quãng đường đã bay</th>
-                      <th >Xác xuất bay đến điểm cuối</th>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>MH_370</td>
-                      <td>Pin yếu</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-red">100%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>ABC</td>
-                      <td>ABC</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-light-blue">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>MH_372</td>
-                      <td>Pin yếu</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 95%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-red">95%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>MH_371</td>
-                      <td>Pin yếu</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-red">90%</span></td>
-                    </tr>
-                    <tr>
-                      <td>5.</td>
-                      <td>BABA_123</td>
-                      <td>Pin yếu</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-yellow">80%</span></td>
-                    </tr>
-                  </table>
-                </div><!-- /.box-body -->
-                <div class="box-footer clearfix">
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                  </ul>
+                <br><br><br>
+                <div class="box-footer text-center">
+                  <button class="btn btn-success" v-on:click="viewPointCloudMesh()">Xem đám mây điểm và lưới</button>
+                </div>
+                <div class="box-footer text-center">
+                  <button class="btn btn-primary" v-on:click="showbando()">Xem bản đồ 3D</button>
                 </div>
               </div><!-- /.box -->
 
-            </div><!-- /.col -->
-            <div class="col-md-6">
-              
-              <div class="box box-default">
-                <div class="box-header with-border">
-                  <i class="fa fa-warning"></i>
-                  <h3 class="box-title">Cảnh báo mới nhất điều kiện xung quanh khu vực bay</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><i class="icon fa fa-ban"></i> Khu vực Hoàng Mai: 15 phút nữa có thể có mưa to</h4>
-                    Theo thông tin dự báo thời tiết thì khu vực Hoàng Mai sẽ có mưa trong 15 phút nữa, xác suất 80%
-                  </div>
-                  <div class="alert alert-warning alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><i class="icon fa fa-warning"></i> Khu vực Hai Bà Trưng: có mưa nhỏ!</h4>
-                    Khu vực Hai Bà Trưng đang có mưa nhỏ, hãy cân nhắc cho drone bay trong khu vực này
-                  </div>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-
-
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Bảng cảnh báo</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table class="table table-bordered">
-                    <tr>
-                      <th>#</th>
-                      <th>Khu vực</th>
-                      <th>Vấn đề</th>
-                      <th>Xác suất ảnh hưởng</th>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Hoàng Mai</td>
-                      <td>Mưa lớn</td>
-                      <td><span class="badge bg-red">80%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Hai Bà Trưng</td>
-                      <td>Mưa lớn</td>
-                      <td><span class="badge bg-yellow">70%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Nam Định</td>
-                      <td>Mưa nhỏ</td>
-                      <td><span class="badge bg-light-blue">20%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Thanh Xuân</td>
-                      <td>Mưa vừa</td>
-                      <td><span class="badge bg-green">40%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Thanh Xuân</td>
-                      <td>Mưa vừa</td>
-                      <td><span class="badge bg-green">40%</span></td>
-                    </tr>
-                  </table>
-                </div><!-- /.box-body -->
-                <div class="box-footer clearfix">
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                  </ul>
+            </section><!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-9 connectedSortable">
+              <div class="box box-primary" id="app1">
+                <div v-if="dungbando == 0">
+                  <p>Bấm vào bản đồ để phóng to / thu nhỏ</p>
+                  <img :src="imgZoom" v-on:click="zoom" style="height: 650px; width: 100%;">
                 </div>
-              </div><!-- /.box -->
-              
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-
+                <div v-else-if="dungbando == 1">
+                  <p>Bấm vào bản đồ để dừng</p>
+                  <video v-if="pointCloudImg==0" v-on:click="{pointCloudImg=1}" muted style="height: 650px; width: 100%; margin-left: 0px" autoplay>
+                    <source src="point-cloud-update.mp4" style="height: 650px; width: 120%; margin-left: 0px" type="video/mp4">
+                  </video>
+                  <img v-else-if="pointCloudImg==1" src="pointCloudImg.png" v-on:click="pointCloudImg=0"  style="height: 650px; width: 100%;">
+                </div>
+                <div v-else-if="dungbando == 2">
+                  <p>Bấm vào bản đồ để dừng</p>
+                  <video v-if="dungbandoCount==0" v-on:click="{dungbandoCount=1}" muted style="height: 650px; width: 100%;" autoplay>
+                    <source src="dungbando-update.mp4" type="video/mp4">
+                  </video>
+                  <img v-else-if="dungbandoCount==1" src="dungbandoImg.png" v-on:click="dungbandoCount=0"  style="height: 650px; width: 100%;">
+                </div>
+              </div>
+            </section><!-- right col -->
+          </div><!-- /.row (main row) -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
@@ -487,9 +347,48 @@
     <script src="dist/js/app.min.js" type="text/javascript"></script>
        
   </body>
-  <script type="text/javascript">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'Day la phan hien thi message',
+        imgZoom: 'nozoom.png',
+        countZoom: 0,
+        pointCloudImg: 0,
+        dungbando: 2,
+        dungbandoCount: 0
+      },
+      methods: {
+        zoom() {
+          this.dungbando = 0
+          if(this.countZoom % 2 == 0){
+            this.imgZoom = 'zoom.png'
+          } else {
+            this.imgZoom = 'nozoom.png'
+          }
+          this.countZoom++
+        },
+        viewPointCloudMesh() {
+          this.dungbando = 1
+        },
+        showbando() {
+          this.dungbando = 2
+        },
+        save() {
+          alert('Lưu bản đồ vào máy tính thành công!')
+        }
+      }
+    })
+
     function clickDemo() {
       alert("Click thành công!!!")
     }
-  </script>
+
+    function create() {
+      alert("Tạo trình bay thành công")
+    }
+    </script>
+      
 </html>

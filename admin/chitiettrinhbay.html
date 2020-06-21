@@ -268,13 +268,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Tạo trình bay
-            <small>đơn giản, nhanh chóng</small>
+            Chi tiết trình bay
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
             <li><a href="#">Quản lý trình bay</a></li>
-            <li class="active">Tạo trình bay</li>
+            <li class="active">Chi tiết trình bay</li>
           </ol>
         </section>
 
@@ -287,15 +286,24 @@
 
               <!-- general form elements -->
               <div class="box box-primary">
-                <div class="box-header text-center">
-                  <h3 class="box-title">Tạo trình bay</h3>
-                </div><!-- /.box-header -->
                 <!-- form start -->
                 <form role="form">
                   <div class="box-body">
                     <!-- select -->
                     <div class="form-group">
-                      <label>Chọn drone</label>
+                      <label>Gán thêm drone cho hành trình bay này</label>
+                      <select class="form-control" multiple>
+                        <option>MH_370</option>
+                        <option>BAB_888</option>
+                        <option>MH_333</option>
+                        <option>VNE_981</option>
+                        <option>VDN_27</option>
+                      </select>
+                    </div>
+
+                    <!-- select -->
+                    <div class="form-group">
+                      <label>Drone đang sử dụng trình bay</label>
                       <select class="form-control">
                         <option>MH_370</option>
                         <option>BAB_888</option>
@@ -308,8 +316,7 @@
                     <div class="form-group">
                       <label>Điểm đầu</label>
                       <select id="start" class="form-control">
-                        <option disabled selected>Chọn 1 vị trí</option>
-                        <option >Cột điện số 1</option>
+                        <option selected>Cột điện số 1</option>
                         <option >Cột điện số 2</option>
                         <option >Cột điện số 3</option>
                         <option >Cột điện số 4</option>
@@ -320,15 +327,153 @@
                     <div class="form-group">
                       <label>Điểm cuối</label>
                       <select id="end" class="form-control">
-                        <option disabled selected>Chọn 1 vị trí</option>
                         <option >Cột điện số 1</option>
                         <option >Cột điện số 2</option>
                         <option >Cột điện số 3</option>
                         <option >Cột điện số 4</option>
-                        <option >Cột điện số 5</option>
+                        <option selected>Cột điện số 5</option>
                         <option >Cột điện số 6</option>
                       </select>
                     </div>
+                    
+                    <!-- waypoint1 -->
+                    <div v-if="deleteValue1==0">
+                      <div class="form-group col-lg-6">
+                        <label>Waypoints</label>
+                        <select id="waypoints" class="form-control">
+                          <option>Cột điện số 1</option>
+                          <option selected>Cột điện số 2</option>
+                          <option>Cột điện số 3</option>
+                          <option>Cột điện số 4</option>
+                          <option>Cột điện số 5</option>
+                          <option>Cột điện số 6</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label>Thông số của drone</label>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal11">Thiết lập 
+                        </button>
+                        <button class="btn btn-danger" v-on:click="deleteValue1=1">Xóa</button>
+                      </div>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="myModal11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel">Thiết lập thông số cho drone tại vị trí waypoint</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                                <div class="form-group col-lg-6">
+                                  <label for="formControlRange01 col-lg-6">Góc nghiêng chụp ( 0 đến 180 độ)</label>
+                                  <input type="range" class="form-control-range" min="0" max="180" id="formControlRange01">
+                                </div>
+                                <div class="form-group">
+                                  <label for="formControlRange01">Chất lượng ảnh: </label>
+                                  <br>
+                                  <input type="radio" id="status-in-use" value="1">
+                                  <label for="status-in-use">HD</label>
+                                  &nbsp; &nbsp;
+                                  <input type="radio" id="status-in-use" value="2">
+                                  <label for="status-in-use">FullHD</label>
+                                  &nbsp; &nbsp;
+                                  <input type="radio" id="status-use" value="3">
+                                  <label for="status-in-use">4K</label>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange01">Thời gian dừng chụp ( Từ 1 đến 100 giây)</label>
+                                <input type="range" class="form-control-range" min="1" max="100" id="formControlRange01" >
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange01">Tốc độ ( Từ 1 đến 100 m/s )</label>
+                                <input type="range" class="form-control-range" min="1" max="100" id="formControlRange01">
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange02">Độ cao ( Từ 5 đến 500 m)<span id="demo02"></span></label>
+                                <input type="range" class="form-control-range" min="5" max="500" id="formControlRange02">
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- waypoint2 -->
+                    <div v-if="deleteValue2==0">
+                      <div class="form-group col-lg-6">
+                        <label>Waypoints</label>
+                        <select id="waypoints" class="form-control">
+                          <option>Cột điện số 1</option>
+                          <option>Cột điện số 2</option>
+                          <option selected>Cột điện số 3</option>
+                          <option>Cột điện số 4</option>
+                          <option>Cột điện số 5</option>
+                          <option>Cột điện số 6</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-lg-6">
+                        <label>Thông số của drone</label>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal12">Thiết lập 
+                        </button>
+                        <button class="btn btn-danger" v-on:click="deleteValue2=1">Xóa</button>
+                      </div>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="myModal12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel">Thiết lập thông số cho drone tại vị trí waypoint</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                                <div class="form-group col-lg-6">
+                                  <label for="formControlRange01 col-lg-6">Góc nghiêng chụp ( 0 đến 180 độ)</label>
+                                  <input type="range" class="form-control-range" min="0" max="180" id="formControlRange01">
+                                </div>
+                                <div class="form-group">
+                                  <label for="formControlRange01">Chất lượng ảnh: </label>
+                                  <br>
+                                  <input type="radio" id="status-in-use" value="1">
+                                  <label for="status-in-use">HD</label>
+                                  &nbsp; &nbsp;
+                                  <input type="radio" id="status-in-use" value="2">
+                                  <label for="status-in-use">FullHD</label>
+                                  &nbsp; &nbsp;
+                                  <input type="radio" id="status-use" value="3">
+                                  <label for="status-in-use">4K</label>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange01">Thời gian dừng chụp ( Từ 1 đến 100 giây)</label>
+                                <input type="range" class="form-control-range" min="1" max="100" id="formControlRange01" >
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange01">Tốc độ ( Từ 1 đến 100 m/s )</label>
+                                <input type="range" class="form-control-range" min="1" max="100" id="formControlRange01">
+                              </div>
+                              <div class="form-group">
+                                <label for="formControlRange02">Độ cao ( Từ 5 đến 500 m)<span id="demo02"></span></label>
+                                <input type="range" class="form-control-range" min="5" max="500" id="formControlRange02">
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div v-for="(item, index) in waypointList" :key="index" :id="'item'+index">
                       <!-- Select-->
                       <div class="form-group col-lg-6">
@@ -409,7 +554,7 @@
                 </form>
 
                 <div class="box-footer text-center">
-                    <button id="submit" class="btn btn-primary" v-on:click="changeView()">Tạo trình bay (bản đồ ảo)</button>
+                    <button id="submit" class="btn btn-primary" v-on:click="changeView()">Lưu các thay đổi</button>
                     <a class="btn btn-primary" href="https://www.figma.com/proto/vtNY9oE4CgxBhNfIQ83mGY/20192?node-id=1%3A2&scaling=scale-down&fbclid=IwAR0W8HtHyvOpVeQzWmnsHNInWRdZwwdOq-AqDnUCBdq2KFSr2wAyjNmCoRw">Cho bay thực tế</a>
                   </div>
               </div><!-- /.box -->
@@ -418,76 +563,15 @@
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <section class="col-lg-9 connectedSortable">
               <div class="box box-primary" id="app1">
-                <div v-if="viewWaypoint">
+                <div>
                   <div class="alert alert-success" role="alert">
                     {{message}}
                   </div>
                   <img :src="waypointsPng" v-on:click="clickImg" style="height: 650px; width: 100%;">
                 </div>
-                <div v-else>
-                  <!-- <p>Khu vực: phường Bách Khoa</p> -->
-                  <div class="alert alert-success" role="alert">
-                    Khu vực: phường Bách Khoa
-                  </div>
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7095009515806!2d105.84370131535874!3d21.004278793988597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac768ffe1abd%3A0x22b136bcf1c08e2a!2zQsOhY2ggS2hvYSwgSGFpIELDoCBUcsawbmcsIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1591199445769!5m2!1svi!2s" width="600" height="450" frameborder="0" style="border:0; height: 650px; width: 100%;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                </div>
               </div>
             </section><!-- right col -->
           </div><!-- /.row (main row) -->
-
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-red">
-                <div class="inner">
-                  <h3>5</h3>
-                  <p>Cảnh báo mới</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="xemcanhbao.html" class="small-box-footer">Chi tiết<i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3>15</h3>
-                  <p>Drone đang hoạt động</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-                <a href="xemdanhsachtrinhbay.html" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-yellow">
-                <div class="inner">
-                  <h3>44</h3>
-                  <p>Drone chưa sử dụng</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="xemdanhsachtrinhbay.html" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3>5<sup style="font-size: 20px"></sup></h3>
-                  <p>Thông tin khác</p>
-                </div>
-                <a href="#" class="small-box-footer" onclick="clickDemo()">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-          </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
@@ -522,7 +606,9 @@
         obj: {},
         waypointList: [],
         waypointsPng: 'waypoints.png',
-        count: 0
+        count: 0,
+        deleteValue1: 0,
+        deleteValue2: 0
       },
       methods: {
         clickImg() {
@@ -535,10 +621,10 @@
           }
         },
         changeView() {
-          this.viewWaypoint = !this.viewWaypoint
           console.log('click')
           var audio = new Audio('rec.mp3')
           audio.play()
+          alert('Cập nhật trình bay thành công')
         },
         addWaypoints() {
           this.obj = {}
