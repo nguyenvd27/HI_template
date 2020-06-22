@@ -19,6 +19,84 @@
     <style type="text/css">
       .hover-img {
         cursor: pointer;
+        opacity: 0.8;
+        animation-name: example;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes example {
+        0%   {background-image: url("xanh-vuong-2-removebg-preview.png"); background-size: 150px 100px}
+        25%  {background-image: url("vuong-removebg-preview.png"); background-size: 150px 100px}
+        50%  {background-image: url("xanh-vuong-2-removebg-preview.png"); background-size: 150px 100px}
+        100% {background-image: url("vuong-removebg-preview.png"); background-size: 150px 100px}
+      }
+
+      /* Code animation */
+      @keyframes example1 {
+        0% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:150px; top:200px;}
+        25% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:270px; top:200px;}
+        50% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:270px; top:250px;}
+        75% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:150px; top:250px;}
+        100% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:150px; top:200px;}
+      }
+
+      /* Áp dụng animation vào phần tử */
+      .drone1 {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        animation-name: example1;
+        animation-duration: 6s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes example2 {
+        0% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:700px; top:250px;}
+        25% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:820px; top:250px;}
+        50% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:820px; top:300px;}
+        75% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:700px; top:300px;}
+        100% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:700px; top:250px;}
+      }
+      .drone2 {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        animation-name: example2;
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes example3 {
+        0% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:400px; top:400px;}
+        25% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:520px; top:400px;}
+        50% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:520px; top:450px;}
+        75% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:400px; top:450px;}
+        100% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:400px; top:400px;}
+      }
+      .drone3 {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        animation-name: example3;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes example4 {
+        0% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:900px; top:500px;}
+        25% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:1020px; top:500px;}
+        50% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:1020px; top:550px;}
+        75% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:900px; top:550px;}
+        100% {background-image: url("drone-removebg-preview.png"); background-size: 100% 100%; left:900px; top:500px;}
+      }
+      .drone4 {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        animation-name: example4;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
       }
     </style>
   </head>
@@ -369,10 +447,11 @@
             <section class="col-lg-12 connectedSortable">
               <div class="box box-primary" id="app1">
                 <div class="box-header">
-                  <h3 class="box-title">Tổng: 4 bản đồ 3D ( Khu vực được đánh màu đỏ trên bản đồ 2D )</h3>
+                  <h3 class="box-title">Tổng: 4 bản đồ 3D ( Khu vực được đánh màu xanh trên bản đồ 2D )</h3>
                 </div>
                 <div>
-                  <img v-on:click="viewDetail" class="hover-img" src="vuong-removebg-preview.png" style="position: absolute; top: 200px; left: 150px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
+                  <!-- <div class="drone" style="position: absolute; top: 200px; left: 150px;"></div> -->
+                  <img v-on:click="viewDetail" class="hover-img" src="xanh-vuong-2-removebg-preview.png" style="position: absolute; top: 200px; left: 150px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
                   <div style='height: 30px; width: 400px; background-color: green'>
                     <p style='width: 400px; background-color: black'>ID: JKDM01234567<p>
                     <video muted style=' width: 400px' autoplay>
@@ -380,7 +459,9 @@
                   </video>
                   </div>
                   ">
-                  <img v-on:click="viewDetail" class="hover-img" src="vuong-removebg-preview.png" style="position: absolute; top: 250px; left: 700px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
+                  <div class="drone1" style="position: absolute; top: 200px; left: 150px;"></div>
+
+                  <img v-on:click="viewDetail" class="hover-img" src="xanh-vuong-2-removebg-preview.png" style="position: absolute; top: 250px; left: 700px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
                   <div style='height: 30px; width: 400px; background-color: green'>
                     <p style='width: 400px; background-color: black'>ID: JKDM01234567<p>
                     <video muted style=' width: 400px' autoplay>
@@ -388,7 +469,9 @@
                   </video>
                   </div>
                   ">
-                  <img v-on:click="viewDetail" class="hover-img" src="vuong-removebg-preview.png" style="position: absolute; top: 400px; left: 400px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
+                  <div class="drone2" style="position: absolute; top: 250px; left: 700px;"></div>
+
+                  <img v-on:click="viewDetail" class="hover-img" src="xanh-vuong-2-removebg-preview.png" style="position: absolute; top: 400px; left: 400px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
                   <div style='height: 30px; width: 400px; background-color: green'>
                     <p style='width: 400px; background-color: black'>ID: JKDM01234567<p>
                     <video muted style=' width: 400px' autoplay>
@@ -396,7 +479,9 @@
                   </video>
                   </div>
                   ">
-                  <img v-on:click="viewDetail" class="hover-img" src="vuong-removebg-preview.png" style="position: absolute; top: 500px; left: 900px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
+                  <div class="drone3" style="position: absolute; top: 400px; left: 400px;"></div>
+
+                  <img v-on:click="viewDetail" class="hover-img" src="xanh-vuong-2-removebg-preview.png" style="position: absolute; top: 500px; left: 900px; height: 100px; width: 150px" data-toggle="tooltip" data-placement="right" data-html="true" title="
                   <div style='height: 30px; width: 400px; background-color: green'>
                     <p style='width: 400px; background-color: black'>ID: JKDM01234567<p>
                     <video muted style=' width: 400px' autoplay>
@@ -404,6 +489,8 @@
                   </video>
                   </div>
                   ">
+                  <div class="drone4" style="position: absolute; top: 500px; left: 900px;"></div>
+
                   <img src="bando.png" style="height: 750px; width: 100%;">
                 </div>
               </div>
